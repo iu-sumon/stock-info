@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="theme-dark.css">
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- For Font Awesome icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+        <style>
+            :root {
+                --ion-safe-area-top: 20px;
+                --ion-safe-area-bottom: 22px;
+    
+                /*---------Added by sumon------------ */
+                --data-table-color: black;
+                --data-table-row-first-color: black;
+                --data-table-row-first-bg: #FCFCFC;
+                --data-table-row-first-border: #F1F2F6;
+                --data-table-row-first-border-right: #F1F2F6;
+                --data-table-row-first-border-bottom: #F1F2F6;
+                --data-table-row-column-border-right: #F1F2F6;
+                --data-table-row-column-border-bottom: #F1F2F6;
+                --data-table-head-bg: #F8F8FA;
+                --data-table-row-bg: #FCFCFC;
+                --data-table-tr-hover-bg: #F0F8FF;
+                --data-table-tr-first-child-hover-bg: #F8F8FA;
+    
+                --nav-background-color: #fff;
+                --nav-mobile-stock-info-link-tabs-border-color: #F1F2F6;
+                --nav-mobile-stock-info-link-color: #0056b3;
+                --list-color: #09132C;
+                --nav-mobile-stock-info-tabs-color: #00acc5;
+                --nav-mobile-stock-info-tabs-back-ground-color: rgba(11, 144, 255, 0.1);
+                --nav-mobile-stock-info-tabs-border-color: #00acc5;
+                --dividends-data-table-tr-hover-bg: #F0F8FF;
+                --dividends-data-table-tr-first-child-hover: #F8F8FA;
+                --dividends-data-table-row-column-color: #000;
+                --dividends-data-table-row-border: #F1F2F6;
+                --insider-activity-data-table-tr-hover: #F0F8FF;
+                --insider-activity-data-table-tr-first-child-hover-bg: #F8F8FA;
+                --insider-row-border-color: #F1F2F6;
+                --insider-row-column-color: #000;
+                --profile-item-text-color-rgba: #000;
+                --parentTr-bg: #DFE9F2;
+                --modal-content-bg: #ffffff;
+                --highlight-column-value-color: black;
+                --column-title-left-color: #495057;
+                --highlight-last-column-name-color: #495057;
+                --highlight-subtitle-color: #495057;
+                --arrow-icon-bg: #fff;
+                --highlight-title-color: #1c1a1a;
+                --highlights-data-table-td-border: #c6c7c9;
+                --prev-color: #797878;
+                --row2-bg-color: #dddde4;
+                --hightlights-subtitle-color: #e1e1f1;
+                --timeAndsales-thead-bg: #dddde4;
+                --bidAndask-middle-column-bg: #fff;
+                --bidAndask-tr-bg: #e2e2e2;
+    
+            }
+    
+            .timeAndsales-table-parent .timeAndsales-thead th {
+                background-color: var(--timeAndsales-thead-bg);
+            }
+    
+            .bidAndask-table-parent .bidAndask-thead th {
+                background-color: var(--timeAndsales-thead-bg);
+            }
+    
+            .bidAndask-middle-column-name {
+    
+                background: var(--bidAndask-middle-column-bg) !important;
+            }
+    
+            .bidAndask-tbody tr:nth-child(even) {
+                background-color: var(--bidAndask-tr-bg);
+            }
+    
+            .bidAndask-middle-column-value {
+                background: var(--bidAndask-middle-column-bg);
+            }
+    
+            .hightligts-subtitle-color {
+                background-color: var(--hightlights-subtitle-color);
+            }
+    
+            .row2 {
+                background-color: var(--row2-bg-color);
+            }
+    
+            .prev {
+                color: var(--prev-color) !important;
+            }
+    
+            .highlights-data-table td {
+                border: .1px solid var(--highlights-data-table-td-border);
+            }
+    
+            .prev {
+                color: var(--prev-color) !important;
+            }
+    
+            ion-footer {
+                display: block;
+                position: fixed;
+                -ms-flex-order: 1;
+                bottom: 0;
+                order: 1;
+                width: 100%;
+                z-index: 10;
+            }
+    
+            .btn.focus {
+                box-shadow: none !important;
+                border: none !important;
+            }
+    
+            .btn-outline-primary:not(:disabled):not(.disabled).active {
+                background-image: linear-gradient(to right, #04befe, #3f86ed);
+            }
+    
+            .animate.active {
+                animation: slide-left .4s ease-out;
+            }
+    
+            .data-table {
+                color: var(--data-table-color);
+            }
+    
+            .data-table-head-bg {
+                background-color: var(--data-table-head-bg);
+            }
+    
+            .data-table-row-bg {
+                background-color: var(--data-table-row-bg);
+            }
+    
+            .data-table-row-first {
+                color: var(--data-table-row-first-color);
+                background-color: var(--data-table-row-first-bg);
+                border: 1px solid var(--data-table-row-first-border);
+                border-right: 1px solid var(--data-table-row-first-border-right);
+                border-bottom: 1px solid var(--data-table-row-first-border-bottom);
+            }
+    
+            .data-table-row-column {
+                border-right: 1px solid var(--data-table-row-column-border-right);
+                border-bottom: 1px solid var(--data-table-row-column-border-bottom);
+            }
+    
+            .data-table tr:hover {
+                background-color: var(--data-table-tr-hover-bg);
+            }
+    
+            .data-table tr:first-child:hover {
+                background-color: var(--data-table-tr-first-child-hover-bg);
+            }
+    
+            #parentTrIncStatementQuarter,
+            #parentTrSecondIncStatementQuarter,
+            #parentTrIncStatementAnnual,
+            #parentTrSecondIncStatementAnnual,
+            #parentTrBalSheetQuarter,
+            #parentTrSecondBalSheetQuarter,
+            #parentTrThirdBalSheetQuarter,
+            #parentTrFourthBalSheetQuarter,
+            #parentTrFifthBalSheetQuarter,
+            #parentTrBalSheetAnnual,
+            #parentTrSecondBalSheetAnnual,
+            #parentTrThirdBalSheetAnnual,
+            #parentTrFourthBalSheetAnnual,
+            #parentTrFifthBalSheetAnnual,
+            #parentTrCashFlowQuarter,
+            #parentTrSecondCashFlowQuarter,
+            #parentTrThirdCashFlowQuarter,
+            #parentTrCashFlowAnnual,
+            #parentTrSecondCashFlowAnnual,
+            #parentTrThirdCashFlowAnnual {
+                cursor: pointer;
+                background-color: var(--parentTr-bg);
+            }
+    
+            nav {
+                background-color: var(--nav-background-color);
+            }
+    
+            .nav-mobile-stock-info-tabs {
+                border-bottom: 1px solid var(--nav-mobile-stock-info-link-tabs-border-color);
+            }
+    
+            .nav-mobile-stock-info-link{
+                color: var(--nav-mobile-stock-info-link-color);
+            }
+    
+            .list-color {
+                color: var(--list-color);
+            }
+    
+            .nav-mobile-stock-info-tabs .nav-mobile-stock-info-link.active {
+                color: var(--nav-mobile-stock-info-tabs-color);
+                background-color: var(--nav-mobile-stock-info-tabs-back-ground-color);
+                border-color: var(--nav-mobile-stock-info-tabs-border-color);
+            }
+    
+            .dividends-data-table tr:hover {
+                background-color: var(--dividends-data-table-tr-hover-bg);
+            }
+    
+            .dividends-data-table tr:first-child:hover {
+                background-color: var(--dividends-data-table-tr-first-child-hover);
+            }
+    
+            .dividends-data-table-row {
+                border: 1px solid var(--dividends-data-table-row-border);
+            }
+    
+            .dividends-data-table-row-column {
+                color: var(--dividends-data-table-row-column-color);
+            }
+    
+            .insider-activity-data-table tr:hover {
+                background-color: var(--insider-activity-data-table-tr-hover);
+            }
+    
+            .insider-activity-data-table tr:first-child:hover {
+                background-color: var(--insider-activity-data-table-tr-first-child-hover-bg);
+            }
+    
+            .insider-activity-data-table-row {
+                border: 1px solid var(--insider-row-border-color);
+            }
+    
+            .insider-activity-data-table-row-column {
+                color: var(--insider-row-column-color);
+            }
+    
+            .profile-item-text {
+                color: var(--profile-item-text-color-rgba);
+            }
+    
+            .modal-content {
+                background-color: var(--modal-content-bg);
+                color: var(--profile-item-text-color-rgba);
+            }
+    
+            .highlight-column-value {
+                color: var(--highlight-column-value-color);
+            }
+    
+            .column-title-left {
+                color: var(--column-title-left-color);
+            }
+    
+            .column-value-right {
+    
+                color: var(--column-title-left-color);
+            }
+    
+            .highlight-last-column-name {
+                color: var(--highlight-last-column-name-color);
+            }
+    
+            .highlight-subtitle {
+                color: var(--highlight-subtitle-color);
+            }
+    
+            .arrow-icon {
+                background-color: var(--arrow-icon-bg);
+            }
+    
+            .highlight-title {
+                color: var(--highlight-title-color);
+            }
+    
+            .highlight-column-name {
+                color: var(--highlight-last-column-name-color);
+            }
+     
+        </style>
+</head>
+<body style="background-color: black;">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-5">
+                <div class="highlight-box">
+                    <div class="highlight-title-box clearfix">
+                        <div class="highlight-title false">
+
+                        </div>
+                    </div> 
+                    <div class="highlight-counter">
+                        <div class="highlight-counter-style green false">
+                            <div class="price g-clickable">167.45</div>
+                            <div class="changePrice">
+                                <span class="ratio">+2.38</span><span class="ratio"> +1.44% </span>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="arrow-icon">
+                    <i class="fa fa-angle-double-down"></i> 
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="highlight-second-chlid">
+                    <div class="highlight-subtitle buysellbtn">
+
+                        <button class="parallelogram1 column-title-left">
+                            BUY
+                        </button>
+                        <button class="parallelogram2 column-value-right">
+                            SELL
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div id="news-slider">
+
+            </div>
+        </div>
+        <div id="full-details">
+            <div class="row mt-3 col-pad">
+                <div class="col highlight-column-name">
+                    OPEN
+                    <div class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    HIGH
+                    <div class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    LOW
+                    <div class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    YCP
+                    <div id="yesterday_close" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-last-column-name">
+                    TURNOVER
+                    <div class="highlight-column-value">-</div>
+                </div>
+            </div>
+            <div class="row mt-2 col-pad">
+                <div class="col highlight-column-name">
+                    UP LIMIT
+                    <div class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    DOWN LIMIT
+                    <div class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    FLOOR
+                    <div id="floor_data" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    52W H/L
+                    <div id="whl52" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-last-column-name">
+                    VOLUME
+                    <div class="highlight-column-value">-</div>
+                </div>
+            </div>
+            <div class="row mt-2 col-pad">
+                <div class="col highlight-column-name">
+                    PE
+                    <div id="p_e" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    RESERVE
+                    <div id="reserve" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    NAV
+                    <div id="nav" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    DIV.YIELD
+                    <div id="dividend_yield" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-last-column-name">
+                    YEAR.END
+                    <div id="year_end" class="highlight-column-value">-</div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-1 col-pad">
+                <div class="col highlight-column-name">
+                    FREE FLOAT
+                    <div id="free_float" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    TOT. SHARE
+                    <div id="total_share" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    MARKET CAP
+                    <div id="market_cap" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-column-name">
+                    PAIDUP
+                    <div id="paid_up_capital" class="highlight-column-value">-</div>
+                </div>
+                <div class="col highlight-last-column-name">
+                    AUTHORIZED
+                    <div id="authorized_capital" class="highlight-column-value">-</div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-1 col-pad">
+                <table class="highlights-data-table">
+                    <tr>
+                        <td class="highlight-column-name">Q1</td>
+                        <td class="highlight-column-name">Q2</td>
+                        <td class="highlight-column-name">Q3</td>
+                        <td class="highlight-column-name">EPS(TTM)</td>
+                        <!-- <td class="highlight-column-name">DIV.<span id="declaration_date">2021</span></td> -->
+                        <td class="highlight-column-name">LAST.DIV</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-column-value"><span id="q1_latest"></span>
+                            <span id="q1_latest_diff"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value"><span id="q2_latest"></span>
+                            <span id="q2_latest_diff"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value"><span id="q3_latest"></span>
+                            <span id="q3_latest_diff"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value"><span id="eps_annual_ttm"></span>
+                            <span id="eps_annual_ttm_diff"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value"><span id="dividend-cash"></span>
+                            <span id="diff_between_cash"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="q1_earlier" class="highlight-column-value prev">15</td>
+                        <td id="q2_earlier" class="highlight-column-value prev">15</td>
+                        <td id="q3_earlier" class="highlight-column-value prev">15</td>
+                        <td id="eps_annual_latest" class="highlight-column-value prev">15</td>
+                        <td id="dividend-stock" class="highlight-column-value">15</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row col-pad">
+                <div class="highlight-subtitle">Holdings [as on <span id="holding-subtitle"></span>]
+                </div>
+                <table class="highlights-data-table">
+                    <tr>
+                        <td class="highlight-column-name">Director</td>
+                        <td class="highlight-column-name">Govt.</td>
+                        <td class="highlight-column-name">Institute</td>
+                        <td class="highlight-column-name">Foreign</td>
+                        <td class="highlight-column-name">Public</td>
+                    </tr>
+
+                    <tr>
+                        <td class="highlight-column-value"><span id="sponsor_director_latest"></span>
+                            <span id="sponsor_director_change"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value"><span id="govt_share_latest"></span>
+                            <span id="govt_share_change"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value"><span id="institute_share_latest"></span>
+                            <span id="institute_share_change"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value"><span id="foreign_share_latest"></span>
+                            <span id="foreign_share_change"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                        </td>
+                        <td class="highlight-column-value">
+                            <span id="public_share_change"
+                                class="highlight-column-value of_number_to_be_evaluated small-font"></span>
+                            <span id="public_share_latest"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="sponsor_director" class="highlight-column-value prev">15</td>
+                        <td id="govt_share" class="highlight-column-value prev">15</td>
+                        <td id="institute_share" class="highlight-column-value prev">15</td>
+                        <td id="foreign_share" class="highlight-column-value prev">15</td>
+                        <td id="public_share" class="highlight-column-value prev">15</td>
+                    </tr>
+                    <tr>
+                        <td id="director_share_percentage" class="highlight-column-value small-font">
+                            15cr</td>
+                        <td id="govt_share_percentage" class="highlight-column-value small-font">15cr
+                        </td>
+                        <td id="institute_share_percentage" class="highlight-column-value small-font">
+                            15cr</td>
+                        <td id="foreign_share_percentage" class="highlight-column-value small-font">15cr
+                        </td>
+                        <td id="public_share_percentage" class="highlight-column-value"
+                            style="font-size:8px">
+                            15cr
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-pills mb-1 nav-pots" id="nav-tab1" role="tablist">
+                    <li class="nav-mobile-stock-info-item-round col-3">
+                        <a class="nav-mobile-stock-info-link active" id="nav-bprice-tab" data-toggle="tab"
+                            href="#nav-bprice" role="tab" aria-controls="nav-bprice"
+                            aria-selected="true">By Price</a>
+                    </li>
+                    <li class="nav-mobile-stock-info-item-round col-3">
+                        <a class="nav-mobile-stock-info-link" id="nav-bprice-tab" data-toggle="tab" href="#nav-bprice"
+                            role="tab" aria-controls="nav-bprice" aria-selected="true">By Order</a>
+                    </li>
+
+                    <li class="nav-mobile-stock-info-item-round col-3">
+                        <a class="nav-mobile-stock-info-link" id="nav-tas-tab" data-toggle="tab" href="#nav-tas"
+                            role="tab" aria-controls="nav-tas" aria-selected="false">Time&Sales</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- Prepare a DOM with a defined width and height for ECharts -->
+        <div class="market-depth-section">
+            <span class="bidPerQ">70%</span>
+            <span id="market-depth-bar"></span>
+            <span class="askPerQ">30%</span>
+        </div>
+
+        <div class="tab-content" id="nav-tabContent1">
+            <!-- By price start -->
+<div class="tab-pane  show active" id="nav-bprice" role="tabpanel"
+    aria-labelledby="nav-bprice-tab">
+    <div class="row col-pad-bidAndask">
+
+    <div class="bidAndask-table-parent">
+        <table class="bidAndask-data-table">
+            <thead class="bidAndask-thead">
+                <tr>
+                    <th class="bid-sl-name">SL</th>
+                    <th class="bidQ-column-name">BID Q</th>
+                    <th class="bid-column-name">BID</th>
+                    <th class="bidAndask-middle-column-name"></th>
+                    <th class="ask-column-name">ASK</th>
+                    <th class="askQ-column-name">ASK Q</th>
+                    <th class="ask-sl-name">SL</th>
+                </tr>
+            </thead>
+            <tbody class="bidAndask-tbody">
+                <tr>
+                    <td class="bid-sl-value">1</td>
+                    <td class="set-row-color1 bidQ-column-value">39.00</td>
+                    <td class="set-row-color1 bid-column-value">520</td>
+                    <td class="bidAndask-middle-column-value">
+                        <div class="arrow-icon2">
+                            <i class="fa fa-angle-double-down"></i> 
+                        </div>
+                    </td>
+                    <td class="set-row-color2 ask-column-value">21.90</td>
+                    <td class="set-row-color2 askQ-column-value">160</td>
+                    <td class="ask-sl-value">1</td>
+                </tr>
+                <tr>
+                    <td class="bid-sl-value">2</td>
+                    <td class="set-row-color1 bidQ-column-value">38.00</td>
+                    <td class="set-row-color1 bid-column-value">420</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">20.50</td>
+                    <td class="set-row-color2 askQ-column-value">150</td>
+                    <td class="ask-sl-value">2</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">3</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">3</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">4</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">4</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">5</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">5</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">6</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">6</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">7</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">7</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">8</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">8</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">9</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">9</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">10</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">10</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">11</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">11</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">12</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">12</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">13</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">13</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">14</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">14</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">15</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">15</td>
+                </tr>
+                <tr class="bidAndask-row">
+                    <td class="bid-sl-value">16</td>
+                    <td class="set-row-color1 bidQ-column-value">35.00</td>
+                    <td class="set-row-color1 bid-column-value">320</td>
+                    <td class="bidAndask-middle-column-value"></td>
+                    <td class="set-row-color2 ask-column-value">18.90</td>
+                    <td class="set-row-color2 askQ-column-value">120</td>
+                    <td class="ask-sl-value">16</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+            <!-- By price end -->
+<div class="tab-pane" id="nav-tas" role="tabpanel" aria-labelledby="nav-tas-tab">
+<div class="row col-pad-timesales">
+        <!-- <div class="timeAndsales-subtitle">Time and Sales</div> -->
+<div class="timeAndsales-table-parent">
+<table id="timeAndsales-data-table-id" class="timeAndsales-data-table">
+<thead class="timeAndsales-thead">
+    <tr>
+        <th class="timeAndsales-fast-column-name">Time</th>
+        <th class="timeAndsales-buy-sell-column-name">Buy/Sell</th>
+        <th class="timeAndsales-quantity-column-name">Quantity</th>
+        <th class="timeAndsales-price-column-name">Price</th>
+        <th class="timeAndsales-last-column-name">NT</th>
+    </tr>
+</thead>
+<tbody class="timeAndsales-tbody">
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Sell</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Sell</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Sell</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Sell</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Sell</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Sell</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+<tr>
+    <td class="set-row-color timeAndsales-fast-column-value">
+        12:51:14</td>
+    <td class="set-row-color timeAndsales-buy-sell-column-value">Buy</td>
+    <td class="set-row-color timeAndsales-quantity-column-value">
+        1,0100</td>
+    <td class="set-row-color timeAndsales-price-column-value">
+        21.90</td>
+    <td class="set-row-color timeAndsales-last-column-value">1
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <nav class="sticky-top">
+                    <div class="nav nav-mobile-stock-info-tabs " id="nav-tab" role="tablist">
+                        <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link active" id="nav-chart-tab" data-toggle="tab"
+                            href="#nav-chart" role="tab" aria-controls="nav-chart"
+                            aria-selected="true">Chart</a>
+                        <!-- <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-note-tab" data-toggle="tab" href="#nav-note" role="tab"
+                                aria-controls="nav-note" aria-selected="false">Note</a> -->
+                        <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-news-tab" data-toggle="tab"
+                            href="#nav-news" role="tab" aria-controls="nav-news"
+                            aria-selected="false">News</a>
+                        <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-analysis-tab" data-toggle="tab"
+                            href="#nav-analysis" role="tab" aria-controls="nav-analysis"
+                            aria-selected="false">Analysis</a>
+                        <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-company-tab" data-toggle="tab"
+                            href="#nav-company" role="tab" aria-controls="nav-company"
+                            aria-selected="false">Company</a>
+                        <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-order-flow-tab" data-toggle="tab"
+                            href="#nav-order-flow" role="tab" aria-controls="nav-order-flow"
+                            aria-selected="false">Order Flow</a>
+                    </div>
+                </nav>
+                <div class="tab-content " id="nav-tabContent">
+                    <!-- chart start -->
+                    <div class="tab-pane fade show active" id="nav-chart" role="tabpanel"
+                        aria-labelledby="nav-chart-tab">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-pills mb-1 nav-pots" id="nav-tab2" role="tablist">
+                                    <li class="nav-mobile-stock-info-item-round col-3">
+                                        <a class="nav-mobile-stock-info-link" id="nav-minute-tab" data-toggle="tab"
+                                            href="#nav-minute" role="tab" aria-controls="nav-minute"
+                                            aria-selected="false">Minute</a>
+                                    </li>
+
+                                    <li class="nav-mobile-stock-info-item-round col-3">
+                                        <a class="nav-mobile-stock-info-link active" id="nav-simple-tab" data-toggle="tab"
+                                            href="#nav-simple" role="tab" aria-controls="nav-simple"
+                                            aria-selected="true">Simple</a>
+                                    </li>
+                                    <!-- <li class="nav-mobile-stock-info-item-round col-3">
+                                        <a class="nav-mobile-stock-info-link" id="nav-pro-tab" data-toggle="tab"
+                                            href="#nav-pro" role="tab" aria-controls="nav-pro"
+                                            aria-selected="false">Pro</a>
+                                    </li> -->
+                                    <li class="nav-mobile-stock-info-item-round col-3">
+                                        <a class="nav-mobile-stock-info-link" id="nav-pro-tab" data-toggle="modal"
+                                            data-target="#exampleModalCenter2">Pro</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane show active" id="nav-simple" role="tabpanel"
+                            aria-labelledby="nav-simple-tab">
+                            <div id="tv_chart_container">
+                                <!-- This div will contain the Charting Library widget. -->
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane" id="nav-pro" role="tabpanel"
+                            aria-labelledby="nav-pro-tab">
+                            <!-- <div id="tv_chart_container_advanced">
+                                 This div will contain the Charting Library widget. 
+                            </div> -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-pills mb-1 nav-pots" id="nav-tab2" role="tablist">
+                                    <li class="nav-mobile-stock-info-item-round col-3">
+                                        <select id="select-sector" class="tchart-sectors">
+                                            <option id="nav-tchart-tab" data-toggle="tab"
+                                                href="#nav-tchart" role="tab" aria-controls="nav-tchart"
+                                                aria-selected="true">All</option>
+                                            <option>Financial</option>
+                                            <option>Healthcare</option>
+                                            <option>Materials</option>
+                                            <option>Utilities</option>
+                                            <option>Industrials</option>
+                                            <option>Energy</option>
+                                            <option>Consumer Staples</option>
+                                            <option>Consumer Discretionary</option>
+                                            <option>Communication Services</option>
+                                            <option>Information Technology</option>
+                                        </select>
+                                    </li>
+                                    <li class="nav-mobile-stock-info-item-round col-3">
+                                        <a class="nav-mobile-stock-info-link" id="nav-simple-tab1" data-toggle="tab"
+                                            href="#nav-simple1" role="tab" aria-controls="nav-simple1"
+                                            aria-selected="false">Test 1</a>
+                                    </li>
+
+                                    <li class="nav-mobile-stock-info-item-round col-3">
+                                        <a class="nav-mobile-stock-info-link" id="nav-pro-tab1" data-toggle="tab"
+                                            href="#nav-pro1" role="tab" aria-controls="nav-pro1"
+                                            aria-selected="false">Test 2</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane show active" id="nav-tchart" role="tabpanel"
+                            aria-labelledby="nav-tchart-tab">
+                            <div id="treemap-chart-container" style="width: 90vw; height:300px;">
+
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane" id="nav-pro1" role="tabpanel"
+                            aria-labelledby="nav-pro-tab1">
+                            <!-- <div id="tv_chart_container_advanced">
+                                 This div will contain the Charting Library widget. 
+                            </div> -->
+                        </div>
+
+
+                    </div>
+                    <!-- chart end -->
+
+                    <!-- news start -->
+                    <div class="tab-pane fade" id="nav-news" role="tabpanel"
+                        aria-labelledby="nav-news-tab">
+                        <ul class="list-group">
+                            <li class="list list-align  text-title  " data-toggle="modal"
+                                data-target="#exampleModalCenter">
+                                <div class="list-color list-style">Credit Suisse Slashed
+                                    Price Targets On Google, Meta
+                                    Ahead Of Quarterly Earnings</div>
+                                <div class="list-sub-item">
+                                    Benzinga&nbsp;&nbsp;·&nbsp;&nbsp;1h ago</div>
+                            </li>
+                            <li class="list list-align  text-title  " data-toggle="modal"
+                                data-target="#exampleModalCenter">
+                                <div class="list-color list-style">Credit Suisse Slashed
+                                    Price Targets On Google, Meta
+                                    Ahead Of Quarterly Earnings</div>
+                                <div class="list-sub-item">
+                                    Benzinga&nbsp;&nbsp;·&nbsp;&nbsp;1h ago</div>
+                            </li>
+                            <li class="list list-align  text-title  " data-toggle="modal"
+                                data-target="#exampleModalCenter">
+                                <div class="list-color list-style">Credit Suisse Slashed
+                                    Price Targets On Google, Meta
+                                    Ahead Of Quarterly Earnings</div>
+                                <div class="list-sub-item">
+                                    Benzinga&nbsp;&nbsp;·&nbsp;&nbsp;1h ago</div>
+                            </li>
+                            <li class="list list-align  text-title  " data-toggle="modal"
+                                data-target="#exampleModalCenter">
+                                <div class="list-color list-style">Credit Suisse Slashed
+                                    Price Targets On Google, Meta
+                                    Ahead Of Quarterly Earnings</div>
+                                <div class="list-sub-item">
+                                    Benzinga&nbsp;&nbsp;·&nbsp;&nbsp;1h ago</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- news end -->
+                    <!-- company start -->
+                    <div class="tab-pane fade" id="nav-company" role="tabpanel"
+                        aria-labelledby="nav-company-tab">
+                        <nav>
+                            <div class="nav nav-mobile-stock-info-tabs" id="nav-tab-company" role="tablist">
+
+                                <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link show active" id="nav-financial-tab"
+                                    data-toggle="tab" href="#nav-financial" role="tab"
+                                    aria-controls="nav-financial" aria-selected="false">Financial</a>
+                                <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-corp-actions-tab" data-toggle="tab"
+                                    href="#nav-corp-actions" role="tab" aria-controls="nav-corp-actions"
+                                    aria-selected="false">Corp
+                                    Actions</a>
+                                <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-profile-tab" data-toggle="tab"
+                                    href="#nav-profile" role="tab" aria-controls="nav-profile"
+                                    aria-selected="false">Profile</a>
+                                <a class="nav-mobile-stock-info-item nav-mobile-stock-info-link" id="nav-holdings-tab" data-toggle="tab"
+                                    href="#nav-holdings" role="tab" aria-controls="nav-holdings"
+                                    aria-selected="false">Holdings</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent-company">
+                            <div class="tab-pane fade show active" id="nav-financial" role="tabpanel"
+                                aria-labelledby="nav-financial-tab">
+                                <!-- financial forecast start -->
+                                <!-- <div class="tab-pane fade show active" id="nav-financial-forecast" role="tabpanel" aria-labelledby="nav-financial-forecast-tab"> -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul class="nav nav-pills mb-3" id="pills-tab-financial-forecast"
+                                            role="tablist">
+                                            <li class="nav-mobile-stock-info-item-round col-3">
+                                                <a class="nav-mobile-stock-info-link active fintab"
+                                                    id="pills-financial-forecast-eps-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-eps" role="tab"
+                                                    aria-controls="pills-financial-forecast-eps"
+                                                    aria-selected="false">EPS</a>
+                                            </li>
+                                            <li class="nav-mobile-stock-info-item-round col-3">
+                                                <a class="nav-mobile-stock-info-link fintab"
+                                                    id="pills-financial-forecast-dividend-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-dividend" role="tab"
+                                                    aria-controls="pills-financial-forecast-dividend"
+                                                    aria-selected="false">Dividend</a>
+                                            </li>
+                                            <li class="nav-mobile-stock-info-item-round col-3">
+                                                <a class="nav-mobile-stock-info-link fintab"
+                                                    id="pills-financial-forecast-roa-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-eps" role="tab"
+                                                    aria-controls="pills-financial-forecast-eps"
+                                                    aria-selected="false">ROA</a>
+                                            </li>
+                                            <li class="nav-mobile-stock-info-item-round col-3">
+                                                <a class="nav-mobile-stock-info-link fintab"
+                                                    id="pills-financial-forecast-roe-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-eps" role="tab"
+                                                    aria-controls="pills-financial-forecast-eps"
+                                                    aria-selected="true">ROE</a>
+                                            </li>
+
+                                            <li class="nav-mobile-stock-info-item-round col-3">
+                                                <a class="nav-mobile-stock-info-link fintab"
+                                                    id="pills-financial-forecast-net-margin-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-eps" role="tab"
+                                                    aria-controls="pills-financial-forecast-eps"
+                                                    aria-selected="false">Net Debt</a>
+                                            </li>
+                                            <li class="nav-mobile-stock-info-item-round col-3">
+                                                <a class="nav-mobile-stock-info-link fintab"
+                                                    id="pills-financial-forecast-debt-to-asset-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-eps" role="tab"
+                                                    aria-controls="pills-financial-forecast-eps"
+                                                    aria-selected="false">Equity</a>
+                                            </li>
+                                            <li class="nav-mobile-stock-info-item-round col-3">
+                                                <a class="nav-mobile-stock-info-link fintab"
+                                                    id="pills-financial-forecast-cfps-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-eps" role="tab"
+                                                    aria-controls="pills-financial-forecast-eps"
+                                                    aria-selected="false">CFPS</a>
+                                            </li>
+                                            <li class="nav-mobile-stock-info-item-round col-3" id="bvps-display">
+                                                <a class="nav-mobile-stock-info-link fintab"
+                                                    id="pills-financial-forecast-bvps-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-financial-forecast-eps" role="tab"
+                                                    aria-controls="pills-financial-forecast-eps"
+                                                    aria-selected="false">BVPS</a>
+                                            </li>
+                                            <!-- CRPS tab is no longer needed-->
+                                            <!-- <li class="nav-mobile-stock-info-item-round col-3">
+                                        <a class="nav-mobile-stock-info-link" id="pills-financial-forecast-crps-tab"
+                                            data-toggle="pill" href="#pills-financial-forecast-crps"
+                                            role="tab" aria-controls="pills-financial-forecast-crps"
+                                            aria-selected="false">CRPS</a>
+                                    </li> -->
+                                        </ul>
+
+                                        <div class="tab-content"
+                                            id="pills-tabContent-financial-forecast">
+                                            <!-- financial-forecast-income start -->
+                                             <div class="tab-pane animate fade show active"
+                                                id="pills-financial-forecast-eps" role="tabpanel"
+                                                aria-labelledby="pills-financial-forecast-eps-tab">
+                                                <div class="tab-content"> 
+                                                    <!-- Removed id="pills-tabContent-financial-forecast-cash-flow" from here -->
+                                                    <div class="tab-pane fade show active"
+                                                        id="pills-financial-forecast-eps-quarterly"
+                                                        role="tabpanel"
+                                                        aria-labelledby="pills-financial-forecast-eps-quarterly-tab">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <!-- Prepare a DOM with a defined width and height for ECharts -->
+                                                                <div id="financial-quarter-eps"
+                                                                    class="chart lazyload financial-quarter"
+                                                                    data-expand="-20"
+                                                                    style="width: 100vw; height:400px;">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <!-- Dividends Chart Start -->
+                                            <div class="tab-pane animate fade show"
+                                                id="pills-financial-forecast-dividend" role="tabpanel"
+                                                aria-labelledby="pills-financial-forecast-dividend-tab">
+                                                <!-- <div class="tab-content"
+                                                    id="pills-tabContent-financial-forecast-cash-flow">  -->
+                                                    <div class="tab-pane fade show"
+                                                        id="pills-financial-forecast-dividend-chart"
+                                                        role="tabpanel"
+                                                        aria-labelledby="pills-financial-forecast-dividend-chart-tab">
+                                                        <div class="row">
+                                                            
+                                                            <div class="col-lg-6">
+                                                                <!-- Prepare a DOM with a defined width and height for ECharts -->
+                                                                <div id="financial-dividend-chart"
+                                                                    
+                                                                    data-expand="-20"
+                                                                    style="width: 100vw; height:400px;">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!-- </div> -->
+                                            </div>
+                                            <!-- Dividends Chart End -->
+                                            <!-- financial-forecast-income end -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+                                <!-- financial forecast end -->
+
+                                <ion-item>
+                                    <ion-title>Income Statement</ion-title>
+                                    <a href="" slot="end">
+                                        <ion-tab-button tab="income-statement-table">
+                                            <ion-icon name="chevron-forward-outline" id="income-icon">
+                                            </ion-icon>
+                                        </ion-tab-button>
+                                    </a>
+
+                                </ion-item>
+
+                                <!-- income statement start -->
+                                <!-- <div class="tab-pane fade" id="nav-income-statement" role="tabpanel" aria-labelledby="nav-income-statement-tab"> -->
+
+                                <!-- Chart -->
+                                <div class="tab-pane fade show active"
+                                    id="pills-income-statement-data-chart" role="tabpanel"
+                                    aria-labelledby="pills-income-statement-data-chart-tab">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <ul class="nav nav-pills mb-3"
+                                                id="pills-tab-income-statement" role="tablist">
+                                                <li class="nav-mobile-stock-info-item-round">
+                                                    <a class="nav-mobile-stock-info-link active fintab2"
+                                                        id="pills-income-statement-net-income-tab"
+                                                        data-toggle="pill"
+                                                        href="#pills-income-statement-net-income"
+                                                        role="tab"
+                                                        aria-controls="pills-income-statement-net-income"
+                                                        aria-selected="true">Net Income</a>
+                                                </li>
+                                                <li class="nav-mobile-stock-info-item-round">
+                                                    <a class="nav-mobile-stock-info-link fintab2"
+                                                        id="pills-income-statement-revenue-tab"
+                                                        data-toggle="pill"
+                                                        href="#pills-income-statement-net-income"
+                                                        role="tab"
+                                                        aria-controls="pills-income-statement-net-income"
+                                                        aria-selected="false">Revenue</a>
+                                                </li>
+                                                <li class="nav-mobile-stock-info-item-round">
+                                                    <a class="nav-mobile-stock-info-link fintab2"
+                                                        id="pills-income-statement-operating-income-tab"
+                                                        data-toggle="pill"
+                                                        href="#pills-income-statement-net-income"
+                                                        role="tab"
+                                                        aria-controls="pills-income-statement-net-income"
+                                                        aria-selected="false">Operating Income</a>
+                                                </li>
+
+                                            </ul>
+                                            <div class="tab-content"
+                                                id="pills-tabContent-income-statement">
+                                                <!-- income-statement-net-income start -->
+                                                <div class="tab-pane animate fade show active"
+                                                    id="pills-income-statement-net-income"
+                                                    role="tabpanel"
+                                                    aria-labelledby="pills-income-statement-net-income-tab">
+                                                    <div class="tab-content"
+                                                        id="pills-tabContent-income-statement-net-income">
+                                                        <div class="tab-pane fade show active"
+                                                            id="pills-income-statement-net-income-quarterly"
+                                                            role="tabpanel"
+                                                            aria-labelledby="pills-income-statement-net-income-quarterly-tab">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+
+                                                                    <!-- Prepare a DOM with a defined width and height for ECharts -->
+                                                                    <div id="net-income-quarter"
+                                                                        class="chart lazyload income-quarter"
+                                                                        data-expand="-20"
+                                                                        style="width: 100vw;height:400px;">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- income-statement-net-income end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+                                <!-- income statement end -->
+                                <ion-item>
+                                    <ion-title>Balance Sheet</ion-title>
+                                    <a href="" slot="end">
+                                        <ion-tab-button tab="balance-sheet-table">
+                                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                                        </ion-tab-button>
+                                    </a>
+
+                                </ion-item>
+                                <!-- balance sheet start -->
+                                <!-- <div class="tab-pane fade" id="nav-balance-sheet" role="tabpanel" aria-labelledby="nav-balance-sheet-tab"> -->
+
+                                <!-- Chart -->
+                                <div class="tab-pane fade show active"
+                                    id="pills-balance-sheet-data-chart" role="tabpanel"
+                                    aria-labelledby="pills-balance-sheet-data-chart-tab">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="tab-content" id="pills-tab-balance-sheet">
+                                                <div class="tab-pane fade show active"
+                                                    id="pills-balance-sheet-quarterly" role="tabpanel"
+                                                    aria-labelledby="pills-balance-sheet-quarterly-tab">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+
+                                                            <!-- Prepare a DOM with a defined width and height for ECharts -->
+                                                            <div id="balance-sheet-quarter"
+                                                                class="chart lazyload" data-expand="-20"
+                                                                style="width: 100vw;height:400px;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- balance sheet end -->
+
+                                <ion-item>
+                                    <ion-title>Cash Flow</ion-title>
+                                    <a href="" slot="end">
+                                        <ion-tab-button tab="cash-flow-table">
+                                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                                        </ion-tab-button>
+                                    </a>
+
+                                </ion-item>
+                                <!-- cash flow start -->
+                                <!-- <div class="tab-pane fade" id="nav-cash-flow" role="tabpanel" aria-labelledby="nav-cash-flow-tab"> -->
+
+                                <!-- Chart -->
+                                <div class="tab-pane fade show active" id="pills-cash-flow-data-chart"
+                                    role="tabpanel" aria-labelledby="pills-cash-flow-data-chart-tab">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <ul class="nav nav-pills mb-3" id="pills-tab-cash-flow"
+                                                role="tablist">
+                                                <li class="nav-mobile-stock-info-item-round">
+                                                    <a class="nav-mobile-stock-info-link active fintab3"
+                                                        id="pills-cash-flow-operating-tab"
+                                                        data-toggle="pill"
+                                                        href="#pills-cash-flow-operating" role="tab"
+                                                        aria-controls="pills-cash-flow-operating"
+                                                        aria-selected="true">Operating</a>
+                                                </li>
+                                                <li class="nav-mobile-stock-info-item-round">
+                                                    <a class="nav-mobile-stock-info-link fintab3"
+                                                        id="pills-cash-flow-investing-tab"
+                                                        data-toggle="pill"
+                                                        href="#pills-cash-flow-operating" role="tab"
+                                                        aria-controls="pills-cash-flow-investing"
+                                                        aria-selected="false">Investing</a>
+                                                </li>
+                                                <li class="nav-mobile-stock-info-item-round">
+                                                    <a class="nav-mobile-stock-info-link fintab3"
+                                                        id="pills-cash-flow-financing-tab"
+                                                        data-toggle="pill"
+                                                        href="#pills-cash-flow-operating" role="tab"
+                                                        aria-controls="pills-cash-flow-financing"
+                                                        aria-selected="false">Financing</a>
+                                                </li>
+
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent-cash-flow">
+                                                <!-- cash-flow-operating start -->
+                                                <div class="tab-pane animate fade show active"
+                                                    id="pills-cash-flow-operating" role="tabpanel"
+                                                    aria-labelledby="pills-cash-flow-operating-tab">
+
+                                                    <div class="tab-content"
+                                                        id="pills-tabContent-cash-flow-operating">
+                                                        <div class="tab-pane fade show active"
+                                                            id="pills-cash-flow-operating-quarterly"
+                                                            role="tabpanel"
+                                                            aria-labelledby="pills-cash-flow-operating-quarterly-tab">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+
+                                                                    <!-- Prepare a DOM with a defined width and height for ECharts -->
+                                                                    <div id="cash-flow-operating-quarter"
+                                                                        class="chart lazyload"
+                                                                        data-expand="-20"
+                                                                        style="width: 100vw;height:400px;">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- cash-flow-operating end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Table -->
+
+
+                                <!-- </div> -->
+                                <!-- cash flow end -->
+                                <p id="text-parent">Quarterly</p>
+                                <p id="text-tab1">EPS</p>
+                                <p id="text-tab2">Net Income</p>
+                                <p id="text-tab3">Operating</p>
+                                <ion-footer>
+                                    <ion-item class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label
+                                            class="btn btn-outline-primary btn-sm btn-block sbtn active">
+                                            <input type="radio" name="option-text"
+                                                id="financial-quarterly-btn" autocomplete="off" checked>
+                                            Quarterly
+                                        </label>
+                                        <label class="btn btn-outline-primary btn-sm btn-block sbtn">
+                                            <input type="radio" name="option-text"
+                                                id="financial-annual-btn" autocomplete="off">
+                                            Annual
+                                        </label>
+                                    </ion-item>
+                                </ion-footer>
+
+                            </div>
+                            <!-- corp-actions start -->
+                            <div class="tab-pane fade" id="nav-corp-actions" role="tabpanel"
+                                aria-labelledby="nav-corp-actions-tab">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul class="nav nav-pills mb-3" id="pills-tab-corp-actions"
+                                            role="tablist">
+                                            <li class="nav-mobile-stock-info-item-round">
+                                                <a class="nav-mobile-stock-info-link active"
+                                                    id="pills-corp-actions-dividends-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-corp-actions-dividends" role="tab"
+                                                    aria-controls="pills-corp-actions-dividends"
+                                                    aria-selected="true">Dividends</a>
+                                            </li>
+                                            <li class="nav-mobile-stock-info-item-round">
+                                                <a class="nav-mobile-stock-info-link"
+                                                    id="pills-corp-actions-insider-activity-tab"
+                                                    data-toggle="pill"
+                                                    href="#pills-corp-actions-insider-activity"
+                                                    role="tab"
+                                                    aria-controls="pills-corp-actions-insider-activity"
+                                                    aria-selected="false">Insider
+                                                    Activity</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent-corp-actions">
+                                            <!-- corp-actions-dividends start -->
+                                            <div class="tab-pane fade show active"
+                                                id="pills-corp-actions-dividends" role="tabpanel"
+                                                aria-labelledby="pills-corp-actions-dividends-tab">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <table id="corp-actions-dividends-table"
+                                                            class="dividends-data-table table table-sm table-responsive table-borderless">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- corp-actions-dividends end -->
+                                            <!-- corp-actions-insider-activity start -->
+                                            <div class="tab-pane fade"
+                                                id="pills-corp-actions-insider-activity" role="tabpanel"
+                                                aria-labelledby="pills-corp-actions-insider-activity-tab">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <table id="corp-actions-insider-activity-table"
+                                                            class="insider-activity-data-table table table-sm table-responsive table-borderless">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- corp-actions-insider-activity end -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- corp-actions end -->
+
+                            <!-- profile start -->
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                aria-labelledby="nav-profile-tab">
+                                <div class="content">
+                                    <div class="ps ps--active-y jss2269">
+
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Sector:
+                                                </div>
+                                                <div id="profile_sector" class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Employee:
+                                                </div>
+                                                <div id="profile_employee" class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Company Profile:
+                                                </div>
+                                                <div id="profile_company_profile"
+                                                    class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Address:
+                                                </div>
+                                                <div id="profile_address" class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Contact:
+                                                </div>
+                                                <div id="profile_contact" class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Fax:
+                                                </div>
+                                                <div id="profile_fax" class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Email:
+                                                </div>
+                                                <div id="profile_email" class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Web Address:
+                                                </div>
+                                                <div id="profile_web_address" class="profile-item-text">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Company Secretary Name:
+                                                </div>
+                                                <div id="profile_company_secretary_name"
+                                                    class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Cell No.:
+                                                </div>
+                                                <div id="profile_secretary_cell_no"
+                                                    class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Telephone No.:
+                                                </div>
+                                                <div id="profile_secretary_telephone_no"
+                                                    class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="profile-item">
+                                                <div class="profile-item-lable">Email:
+                                                </div>
+                                                <div id="profile_secretary_email"
+                                                    class="profile-item-text">-
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- profile end -->
+                            <!-- holdings start -->
+                            <div class="tab-pane fade" id="nav-holdings" role="tabpanel"
+                                aria-labelledby="nav-holdings-tab">
+
+                                <div class="row">
+                                    <div class="col-12">
+
+                                        <ion-item>
+                                            <ion-title>Holdings</ion-title>
+                                            <a href="" slot="end">
+                                                <ion-tab-button tab="holdings-table">
+                                                    <ion-icon name="chevron-forward-outline">
+                                                    </ion-icon>
+                                                </ion-tab-button>
+                                            </a>
+
+                                        </ion-item>
+                                        <!-- Prepare a DOM with a defined width and height for ECharts -->
+                                        <div id="holdings-bar" style="width: 90vw;height:700px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- holdings end -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- company end -->
+                    <!-- analysis start -->
+                    <div class="tab-pane fade" id="nav-analysis" role="tabpanel"
+                        aria-labelledby="nav-analysis-tab">
+                        
+                            <div class="row">
+                                <div class="col-12">
+                                    <div>Analyst Rating</div>
+                                    <div class="rating-pie">
+                                        <div class="rating-pie-style rating-pie-color-green">
+                                            Buy</div>
+                                        <div style="margin: 0px 20px 12px;">
+                                            Based on 45 analysts</div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="analyst-rating">
+
+                                        <div id="analystRating" style="width: 100vw;height:300px;">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div>Analyst Price Target</div>
+                                    <div id="analystBar" style="width: 100vw;height:300px;">
+                                    </div>
+                                </div>
+                            </div>
+                        
+                    </div>
+                    <!-- analysis end -->
+                    <!-- order-flow start -->
+                    <div class="tab-pane fade" id="nav-order-flow" role="tabpanel"
+                        aria-labelledby="nav-order-flow-tab">
+                         
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between">
+                                        Order Flow Distribution <span
+                                            class="text-mute text-right">Million
+                                            BDT</span></div>
+
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="flow-header">
+                                                <div>Inflow: <span class="inflow-val">3,055.78</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="inflow-li">
+                                                <div class="inflow-dotc"><span
+                                                        class="inflow-large inflow-dot"></span>Large
+                                                </div>
+                                                <div class="inflow-num">
+                                                    <span>903.17</span><span>(18.01%)</span>
+                                                </div>
+                                            </div>
+                                            <div class="inflow-li">
+                                                <div class="inflow-dotc"><span
+                                                        class="inflow-medium inflow-dot"></span>Medium
+                                                </div>
+                                                <div class="inflow-num">
+                                                    <span>1,548.10</span><span>(30.88%)</span>
+                                                </div>
+                                            </div>
+                                            <div class="inflow-li">
+                                                <div class="inflow-dotc"><span
+                                                        class="inflow-small inflow-dot"></span>Small
+                                                </div>
+                                                <div class="inflow-num">
+                                                    <span>604.51</span><span>(12.05%)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+
+                                            <div id="overFlowDistributionPie"
+                                                style="width: 90vw;height:150px;">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="flow-header">
+
+                                                <div>Outflow: <span class="outflow-val">1,956.84</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="inflow-li">
+                                                <div class="inflow-dotc"><span
+                                                        class="outflow-large inflow-dot"></span>Large
+                                                </div>
+                                                <div class="inflow-num">
+                                                    <span>142.38</span><span>(2.84%)</span>
+                                                </div>
+                                            </div>
+                                            <div class="inflow-li">
+                                                <div class="inflow-dotc"><span
+                                                        class="outflow-medium inflow-dot"></span>Medium
+                                                </div>
+                                                <div class="inflow-num">
+                                                    <span>1,294.08</span><span>(25.81%)</span>
+                                                </div>
+                                            </div>
+                                            <div class="inflow-li">
+                                                <div class="inflow-dotc"><span
+                                                        class="outflow-small inflow-dot"></span>Small
+                                                </div>
+                                                <div class="inflow-num">
+                                                    <span>520.38</span><span>(10.41%)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between">Large Scale
+                                        Orders in Last 5 Days <span class="text-mute text-right">Million
+                                            BDT</span></div>
+                                    <div id="overFlowDistributionOrders"
+                                        style="width: 90vw;height:300px;">
+                                    </div>
+                                </div>
+                            </div>
+                       
+                    </div>
+                    <!-- order-flow end -->
+
+
+
+
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+
+
+    <script>
+        var currentTheme = window.localStorage.getItem('theme') ? window.localStorage.getItem('theme') : 'dark';
+        //Check local saved user preference for theme mode dark/light
+
+        if (currentTheme == 'dark') {
+            document.body.classList.remove('dark');
+            document.body.classList.add('dark');
+
+        }
+        else {
+            document.body.classList.remove('dark');
+            document.body.classList.add('light');
+        }
+    </script>
+    <script>
+        //Chart display none and block
+        var income_statement_quarter = document.getElementById("scrolling-container-income-statement-quarter");
+        var income_statement_annual = document.getElementById("scrolling-container-income-statement-annual");
+        var balance_sheet_quarter = document.getElementById("scrolling-container-balance-sheet-quarter");
+        var balance_sheet_annual = document.getElementById("scrolling-container-balance-sheet-annual");
+        var cash_flow_quarter = document.getElementById("scrolling-container-cash-flow-quarter");
+        var cash_flow_annual = document.getElementById("scrolling-container-cash-flow-annual");
+
+        income_statement_quarter.style.display = "block";
+        income_statement_annual.style.display = "none";
+        balance_sheet_quarter.style.display = "block";
+        balance_sheet_annual.style.display = "none";
+        cash_flow_quarter.style.display = "block";
+        cash_flow_annual.style.display = "none";
+
+        function getIncStatementAnnualData() {
+            income_statement_annual.style.display = "block";
+            income_statement_quarter.style.display = "none";
+        }
+        function getIncStatementQuarterlyData() {
+            income_statement_quarter.style.display = "block";
+            income_statement_annual.style.display = "none";
+        }
+        function getBalanceAnnualData() {
+            balance_sheet_annual.style.display = "block";
+            balance_sheet_quarter.style.display = "none";
+        }
+        function getBalanceQuarterlyData() {
+            balance_sheet_quarter.style.display = "block";
+            balance_sheet_annual.style.display = "none";
+        }
+        function getCashFlowAnnualData() {
+            cash_flow_annual.style.display = "block";
+            cash_flow_quarter.style.display = "none";
+        }
+        function getCashFlowQuarterlyData() {
+            cash_flow_quarter.style.display = "block";
+            cash_flow_annual.style.display = "none";
+        }
+    </script>
+    <script>
+        //Chart display none and block
+        var simple_tab = document.getElementById("nav-simple-tab");
+        var pro_tab = document.getElementById("nav-pro-tab");
+        var simple_chart = document.getElementById("tv_chart_container");
+        var pro_chart = document.getElementById("tv_chart_container_advanced");
+
+        simple_chart.style.display = "block";
+        pro_chart.style.display = "none";
+
+        simple_tab.addEventListener('click', function() {
+            simple_chart.style.display = "block";
+            pro_chart.style.display = "none";
+        })
+        pro_tab.addEventListener('click', function() {
+            pro_chart.style.display = "block";
+            simple_chart.style.display = "none";
+        })
+    </script>
+    <script>
+        $('#backToHomepage').on('click', function() {
+            $('#page-content').load('portfolio/mobile_watchlist'); // Redirect to watchlist
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+    <!-- charts on page -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.3/echarts.min.js"
+        integrity="sha512-2L0h0GhoIHQEjti/1KwfjcbyaTHy+hPPhE1o5wTCmviYcPO/TD9oZvUxFQtWvBkCSTIpt+fjsx1CCx6ekb51gw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+</body>
+</html>
